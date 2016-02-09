@@ -3,6 +3,12 @@ var app = express();
 var expressLayouts = require('express-ejs-layouts');
 var http = require('http');
 
+app.set('views', './views');
+app.set('view engine', 'ejs');
+
+app.use(expressLayouts);
+app.use(express.static('public'));
+
 app.get('/', function(req, res){
     res.send('welcome to hell, sky');
 });
