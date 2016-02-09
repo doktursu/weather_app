@@ -10,7 +10,7 @@ app.use(expressLayouts);
 app.use(express.static('public'));
 
 app.get('/', function(req, res){
-    res.send('welcome to hell, sky');
+    res.render('index');
 });
 
 app.get('/weather/:location', function(req, res){

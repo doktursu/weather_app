@@ -3,7 +3,7 @@ function LocationsListModel(locations){
     this._selectedIndex = -1;
 
     this.locationAdded = new Event(this);
-    thie.locationRemoved = new Event(this);
+    this.locationRemoved = new Event(this);
     this.selectedIndexChanged = new Event(this);
 }
 
