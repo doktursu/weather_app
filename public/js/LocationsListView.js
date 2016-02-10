@@ -34,7 +34,7 @@ LocationsListView.prototype = {
     },
 
     rebuildList: function(){
-        var list, locations, key, option;
+        var list, locations, key, option, div;
 
         list = this._elements.list;
         list.innerHTML = '';
@@ -42,67 +42,11 @@ LocationsListView.prototype = {
         locations = this._model.getLocations();
         for(key in locations){
             if(locations.hasOwnProperty(key)){
-                option = document.createElement('option');
-                option.innerHTML = locations[key];
-                list.appendChild(option);
+                div = new LocationView(locations[key], this);
+                list.appendChild(div);
             }
         }
         this._model.setSelectedIndex(-1);
     }
 };
-
-function LocationsListController(model, view){
-    this._model = model;
-    this._view = view;
-
-    var _this = this;
-
-    this._view.listModified.attach(function(sender, args){
-        _this.updateSelected(args.index);
-    });
-
-    this._view.addButtonClicked.attach(function(){
-        _this.addLocation();
-    });
-
-    this._view.delButtonClicked.attach(function(){
-        _this.delLocation();
-    });
-}
-
-LocationsListController.prototype = {
-    addLocation: function(){
-        var location = this._view._elements.input.value;
-        if(location){
-            this._model.addLocation(location);
-        }
-    },
-
-    delLocation: function(){
-        var index;
-
-        index = this._model.getSelectedIndex();
-        if(index !== -1){
-            this._model.removeLocationAt(this._model.getSelectedIndex());
-        }
-    },
-
-    updateSelected: function(index){
-        this._model.setSelectedIndex(index);
-    }
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

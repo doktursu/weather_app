@@ -17,15 +17,13 @@ LocationsListModel.prototype = {
         this.locationAdded.notify(this._locations);
     },
 
-    removeLocationAt: function(index){
-        var location;
-
-        location = this._locations[index];
-        this._locations.splice(index, 1);
+    removeLocation: function(model){
+        this._locations.forEach(function(location, index){
+            if(location === model){
+                this._locations.splice(index, 1);
+            }
+        });
         this.locationRemoved.notify({ location: location });
-        if(index === this._selectedIndex){
-            this.setSelectedIndex(-1);
-        }
     },
 
     getSelectedIndex: function(){
